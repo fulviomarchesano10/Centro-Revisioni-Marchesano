@@ -74,6 +74,11 @@
 </style>
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style id="iphone-login-fix-v23">
+.auth-box{position:relative;z-index:2;touch-action:manipulation}
+.auth-box input{position:relative;z-index:3;display:block;width:100%;min-height:48px;font-size:16px !important;line-height:1.2;-webkit-appearance:none;appearance:none;-webkit-user-select:text;user-select:text;pointer-events:auto;touch-action:manipulation}
+.auth-box input:focus{outline:2px solid rgba(20,115,255,.45);outline-offset:0}
+</style>
 </head>
 <body>
 <div id="auth" class="auth" style="display:none"><div class="auth-card"><div class="auth-logo"><img src="icon-192.png" alt="CRM"></div><h1>Centro Revisioni<br>Marchesano</h1><p>Clienti, veicoli e scadenze sempre con te, ovunque.</p><div class="auth-box"><input id="loginEmail" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Email"><input id="loginPass" type="password" autocomplete="current-password" placeholder="Password"><button class="auth-btn" id="loginBtn">Accedi</button><button class="auth-btn" id="registerBtn" style="background:#ffffff;color:#0b5bd3">Crea account</button><button class="auth-link" id="forgotBtn">Hai dimenticato la password?</button><button class="auth-link" id="configBtn">Impostazioni cloud</button><button class="auth-link" id="localBtn">Continua senza account</button><div id="authMsg" class="local"></div></div></div></div>
@@ -295,9 +300,9 @@ function accountSettings(){if(cloudReady){updateAccountText();toast('Account col
 $('search').oninput=e=>{const q=e.target.value;if(q.trim()){if(!$('clientsPage').classList.contains('active'))showPage('clients');$('clientSearch').value=q;renderClients(q);}else{if($('clientsPage').classList.contains('active'))renderClients('');else renderHome();}};
 $('loginBtn').onclick=login;$('registerBtn').onclick=register;$('forgotBtn').onclick=resetPassword;$('configBtn').onclick=openConfig;$('localBtn').onclick=continueLocal;
 // iPhone Safari focus helper: a short tap on the login fields should always bring up the keyboard.
-['loginEmail','loginPass'].forEach(id=>{const el=$(id);if(el){el.addEventListener('touchend',()=>{setTimeout(()=>{if(document.activeElement!==el)el.focus({preventScroll:true});},35);},{passive:true});el.addEventListener('pointerup',()=>{setTimeout(()=>{if(document.activeElement!==el)el.focus({preventScroll:true});},35);});}});
+['loginEmail','loginPass'].forEach(id=>{const el=$(id);if(!el)return; const focusLogin=()=>{try{el.focus({preventScroll:true});}catch(e){el.focus();}}; el.addEventListener('touchstart',focusLogin,{passive:true}); el.addEventListener('pointerdown',focusLogin,{passive:true}); el.addEventListener('click',focusLogin);});
 renderAll();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=20').catch(()=>{});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=23').catch(()=>{});
 (async()=>{if(cloudReady){const {data:{session}}=await supabaseClient.auth.getSession();if(session){await loadCloud();showApp();updateAccountText();}else showAuth();}else {showAuth();}})();
 
 </script>
