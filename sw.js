@@ -1,4 +1,25 @@
-const CACHE='crm-marchesano-v27';
-self.addEventListener('install',e=>self.skipWaiting());
-self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request,{cache:'no-store'}).then(r=>{const c=r.clone();caches.open(CACHE).then(x=>x.put(e.request,c));return r}).catch(()=>caches.match(e.request)))})
+const CACHE = 'crm-marchesano-v28';
+
+self.addEventListener('install', event => { self.skipWaiting(); });
+
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)));
+    await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch', event => {
+  const req = event.request;
+  if (req.method !== 'GET') return;
+  if (req.mode === 'navigate' || req.destination === 'document') {
+    event.respondWith(fetch(req, {cache:'no-store'}).then(res => {
+      const copy=res.clone(); caches.open(CACHE).then(c=>c.put(req,copy)); return res;
+    }).catch(()=>caches.match(req)));
+    return;
+  }
+  event.respondWith(caches.match(req).then(cached => fetch(req).then(res => {
+    if(res.ok)caches.open(CACHE).then(c=>c.put(req,res.clone())); return res;
+  }).catch(()=>cached)));
+});
