@@ -304,7 +304,7 @@ $('loginBtn').onclick=login;$('registerBtn').onclick=register;$('forgotBtn').onc
 // iPhone Safari focus helper: a short tap on the login fields should always bring up the keyboard.
 ['loginEmail','loginPass'].forEach(id=>{const el=$(id);if(!el)return; const focusLogin=()=>{try{el.focus({preventScroll:true});}catch(e){el.focus();}}; el.addEventListener('touchstart',focusLogin,{passive:true}); el.addEventListener('pointerdown',focusLogin,{passive:true}); el.addEventListener('click',focusLogin);});
 renderAll();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=23').catch(()=>{});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=29').catch(()=>{});
 (async()=>{if(cloudReady){const {data:{session}}=await supabaseClient.auth.getSession();if(session){await loadCloud();showApp();updateAccountText();}else showAuth();}else {showAuth();}})();
 
 </script>
@@ -355,7 +355,6 @@ body{background:linear-gradient(#f8fafc,#f3f6fa)}
     q=(q||$('clientSearch')?.value||'').toLowerCase().trim();
     const list=clients.filter(c=>(c.name+' '+c.phone+' '+c.vehicles.map(v=>v.car+' '+v.plate).join(' ')).toLowerCase().includes(q));
     if(!$('clientSearch'))return;
-    $('clientSearch').value=q;
     $('clientsContent').innerHTML=list.length?list.map(clientCard).join(''):'<div class="empty"><div class="big">👤</div><b>Nessun cliente trovato</b><br><span>Prova un altro nome, numero o targa.</span></div>';
   };
 
