@@ -1,4 +1,4 @@
-const CACHE = 'crm-marchesano-v15';
+const CACHE = 'crm-marchesano-v16';
 
 self.addEventListener('install', event => {
   self.skipWaiting();
