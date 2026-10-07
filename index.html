@@ -49,13 +49,19 @@
 .month-tabs button{border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 11px;font-size:10px;font-weight:900;white-space:nowrap;color:#667085}
 .month-tabs button.active{background:var(--blue);border-color:var(--blue);color:#fff}
 @media(min-width:760px){.client-detail-sheet{max-width:620px}}
+<style>
+.final-nav{grid-template-columns:1fr 1fr 1fr 1fr 1fr;align-items:end}
+.final-nav .nav-plus{pointer-events:auto;border:0;background:transparent;padding:0 2px 4px;height:54px;display:grid;place-items:center}
+.final-nav .nav-plus span{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:28px;line-height:1;box-shadow:0 8px 22px #1473ff55;border:4px solid #f4f7fb}
+@media(max-width:420px){.final-nav .nav-plus span{width:48px;height:48px}}
+</style>
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <div id="auth" class="auth" style="display:none"><div class="auth-card"><div class="auth-logo"><img src="icon-192.png" alt="CRM"></div><h1>Centro Revisioni<br>Marchesano</h1><p>Clienti, veicoli e scadenze sempre con te, ovunque.</p><div class="auth-box"><input id="loginEmail" type="email" placeholder="Email"><input id="loginPass" type="password" placeholder="Password"><button class="auth-btn" id="loginBtn">Accedi</button><button class="auth-btn" id="registerBtn" style="background:#ffffff;color:#0b5bd3">Crea account</button><button class="auth-link" id="forgotBtn">Hai dimenticato la password?</button><button class="auth-link" id="configBtn">Impostazioni cloud</button><button class="auth-link" id="localBtn">Continua senza account</button><div id="authMsg" class="local"></div></div></div></div>
 <div id="app" class="app" style="display:none">
-<header class="top"><div class="brand"><div class="logo"><img src="icon-192.png" alt="CRM"></div><div><h1>Centro Revisioni<br>Marchesano</h1><p>Clienti personali · Scadenze veicoli</p></div><button class="account" id="accountBtn">◉</button></div><input id="search" class="search" placeholder="Cerca cliente, telefono, targa…" autocomplete="off"></header>
+<header class="top"><div class="brand"><div class="logo"><img src="icon-192.png" alt="CRM"></div><div><h1>Centro Revisioni<br>Marchesano</h1><p>Clienti personali · Scadenze veicoli</p></div><button class="account" id="accountBtn">🔔</button></div><input id="search" class="search" placeholder="Cerca cliente, telefono, targa…" autocomplete="off"></header>
 <main class="wrap">
 <section id="homePage" class="page active">
   <div class="stats">
@@ -109,8 +115,7 @@
   </div>
 </section>
 </main>
-<button class="fab" onclick="openClient()">＋</button>
-<nav class="bottom"><button id="navHome" class="active" onclick="showPage('home')"><span class="bi">⌂</span>Home</button><button id="navClients" onclick="showPage('clients')"><span class="bi">♙</span>Clienti</button><button class="new-space"></button><button id="navDeadlines" onclick="showPage('deadlines')"><span class="bi">□</span>Scadenze</button><button id="navOther" onclick="showPage('other')"><span class="bi">☰</span>Altro</button></nav>
+<nav class="bottom final-nav"><button id="navHome" class="active" onclick="showPage('home')"><span class="bi">⌂</span>Home</button><button id="navClients" onclick="showPage('clients')"><span class="bi">♙</span>Clienti</button><button class="nav-plus" onclick="openClient()"><span>＋</span></button><button id="navDeadlines" onclick="showPage('deadlines')"><span class="bi">□</span>Scadenze</button><button id="navOther" onclick="showPage('other')"><span class="bi">☰</span>Altro</button></nav>
 </div>
 <div id="clientModal" class="modal"><div class="sheet"><div class="grab"></div><div class="sheet-head"><h2 id="clientTitle">Nuovo cliente</h2><button class="close" onclick="closeClient()">×</button></div><div class="field"><label>Nome e cognome</label><input id="cName"></div><div class="field"><label>Telefono</label><input id="cPhone" type="tel"></div><div class="subhead">Veicoli del cliente</div><div id="vehicleList" class="mini-list"></div><button class="btn blueghost" style="margin-top:9px" onclick="openVehicle()">＋ Aggiungi veicolo</button><div class="field"><label>Note cliente</label><textarea id="cNotes" placeholder="Note generali sul cliente…"></textarea></div><div class="form-actions"><button class="btn" onclick="closeClient()">Annulla</button><button class="btn primary" onclick="saveClient()">Salva cliente</button></div></div></div>
 
@@ -249,7 +254,7 @@ function accountSettings(){if(cloudReady){updateAccountText();toast('Account col
 $('search').oninput=e=>{if($('clientsPage').classList.contains('active'))renderClients(e.target.value);else renderHome()};$('accountBtn').onclick=()=>showPage('other');
 $('loginBtn').onclick=login;$('registerBtn').onclick=register;$('forgotBtn').onclick=resetPassword;$('configBtn').onclick=openConfig;$('localBtn').onclick=continueLocal;
 renderAll();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=10.0').catch(()=>{});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=11').catch(()=>{});
 (async()=>{if(cloudReady){const {data:{session}}=await supabaseClient.auth.getSession();if(session){await loadCloud();showApp();updateAccountText();}else showAuth();}else {showAuth();}})();
 
 </script>
