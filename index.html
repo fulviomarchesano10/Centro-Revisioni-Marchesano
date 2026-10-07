@@ -83,7 +83,7 @@
 <body>
 <div id="auth" class="auth" style="display:none"><div class="auth-card"><div class="auth-logo"><img src="icon-192.png" alt="CRM"></div><h1>Centro Revisioni<br>Marchesano</h1><p>Clienti, veicoli e scadenze sempre con te, ovunque.</p><div class="auth-box"><input id="loginEmail" type="email" inputmode="email" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Email"><input id="loginPass" type="password" autocomplete="current-password" placeholder="Password"><button class="auth-btn" id="loginBtn">Accedi</button><button class="auth-btn" id="registerBtn" style="background:#ffffff;color:#0b5bd3">Crea account</button><button class="auth-link" id="forgotBtn">Hai dimenticato la password?</button><button class="auth-link" id="configBtn">Impostazioni cloud</button><button class="auth-link" id="localBtn">Continua senza account</button><div id="authMsg" class="local"></div></div></div></div>
 <div id="app" class="app" style="display:none">
-<header class="top"><div class="brand"><div class="logo"><img src="icon-192.png" alt="CRM"></div><div><h1>Centro Revisioni<br>Marchesano</h1><p>Clienti personali · Scadenze veicoli</p></div></div><input id="search" class="search" name="crm-search" type="search" inputmode="search" placeholder="Cerca cliente, telefono, targa…" autocomplete="new-password" autocorrect="off" autocapitalize="none" spellcheck="false"></header>
+<header class="top"><div class="brand"><div class="logo"><img src="icon-192.png" alt="CRM"></div><div><h1>Centro Revisioni<br>Marchesano</h1><p>Clienti personali · Scadenze veicoli</p></div></div><input id="search" class="search" name="customer-search" type="search" inputmode="search" placeholder="Cerca cliente, telefono, targa…" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"></header>
 <main class="wrap">
 <section id="homePage" class="page active">
   <div class="stats">
@@ -103,7 +103,7 @@
 </section>
 <section id="clientsPage" class="page">
   <div class="section-title"><h2>Clienti</h2><button class="icon-add" onclick="openClient()">＋</button></div>
-  <div class="client-search-row"><input id="clientSearch" class="inner-search" name="crm-client-search" type="search" inputmode="search" placeholder="⌕  Cerca cliente, telefono, targa..." autocomplete="new-password" autocorrect="off" autocapitalize="none" spellcheck="false"><button class="filter-icon" onclick="openClientFilter()">☷</button></div>
+  <div class="client-search-row"><input id="clientSearch" class="inner-search" name="customer-filter" type="search" inputmode="search" placeholder="⌕  Cerca cliente, telefono, targa..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"><button class="filter-icon" onclick="openClientFilter()">☷</button></div>
   <div id="clientsContent"></div>
 </section>
 <section id="deadlinesPage" class="page">
