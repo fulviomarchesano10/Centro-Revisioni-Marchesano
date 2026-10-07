@@ -180,7 +180,7 @@ function accountSettings(){if(cloudReady){updateAccountText();toast('Account col
 $('search').oninput=e=>{if($('clientsPage').classList.contains('active'))renderClients(e.target.value);else renderHome()};$('accountBtn').onclick=()=>showPage('other');
 $('loginBtn').onclick=login;$('registerBtn').onclick=register;$('forgotBtn').onclick=resetPassword;$('configBtn').onclick=openConfig;$('localBtn').onclick=continueLocal;
 renderAll();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js?v=8.1').catch(()=>{});
 (async()=>{if(cloudReady){const {data:{session}}=await supabaseClient.auth.getSession();if(session){await loadCloud();showApp();updateAccountText();}else showAuth();}else {showAuth();}})();
 
 </script>
