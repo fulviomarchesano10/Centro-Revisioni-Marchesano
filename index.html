@@ -70,6 +70,7 @@
 .vehicle-type-hint{font-size:10px;color:var(--muted);margin-top:6px}
 
 .search{font-size:16px !important;}
+.inner-search{font-size:16px !important;-webkit-appearance:none;appearance:none;}
 </style>
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -291,7 +292,7 @@ async function resetPassword(){if(!cloudReady)return openConfig();const email=$(
 async function signOut(){if(cloudReady&&supabaseClient)await supabaseClient.auth.signOut();showAuth();setAuthMsg('Sessione chiusa.');}
 async function updateAccountText(){if(!cloudReady||!supabaseClient)return;const {data:{user}}=await supabaseClient.auth.getUser();if(user){$('accountText').textContent=user.email||'Account collegato';updateCloudStatus('Sincronizzato');}}
 function accountSettings(){if(cloudReady){updateAccountText();toast('Account collegato')}else openConfig()}
-$('search').oninput=e=>{if($('clientsPage').classList.contains('active'))renderClients(e.target.value);else renderHome()};
+$('search').oninput=e=>{const q=e.target.value;if(q.trim()){if(!$('clientsPage').classList.contains('active'))showPage('clients');$('clientSearch').value=q;renderClients(q);}else{if($('clientsPage').classList.contains('active'))renderClients('');else renderHome();}};
 $('loginBtn').onclick=login;$('registerBtn').onclick=register;$('forgotBtn').onclick=resetPassword;$('configBtn').onclick=openConfig;$('localBtn').onclick=continueLocal;
 // iPhone Safari focus helper: a short tap on the login fields should always bring up the keyboard.
 ['loginEmail','loginPass'].forEach(id=>{const el=$(id);if(el){el.addEventListener('touchend',()=>{setTimeout(()=>{if(document.activeElement!==el)el.focus({preventScroll:true});},35);},{passive:true});el.addEventListener('pointerup',()=>{setTimeout(()=>{if(document.activeElement!==el)el.focus({preventScroll:true});},35);});}});
@@ -313,7 +314,7 @@ body{background:linear-gradient(#f8fafc,#f3f6fa)}
 .section{margin-top:20px}.section-title{margin-bottom:9px}.section-title h2{font-size:16px}.link{font-size:11px}
 .month-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;overflow:hidden}.month-card{border:1px solid var(--line);border-radius:15px;padding:9px 8px;background:#fff;text-align:center;min-width:0}.month-card.red{background:#fff0ef;border-color:#ffe0dc}.month-card.orange{background:#fff5e8;border-color:#ffe7c4}.month-card.neutral{background:#f4f6f8}.month-card .mname{font-size:9px;font-weight:800;color:#5d6675}.month-card b{display:block;font-size:21px;margin:4px 0 1px}.month-card span{font-size:9px;color:#667085}
 .deadline-row{border-radius:15px;padding:10px;margin:7px 0}.car-icon{width:45px;height:42px;border-radius:11px;font-size:21px}.row-main b{font-size:12px}.row-main span{font-size:9px}.pill{font-size:9px;padding:6px 7px}
-.client-search-row{display:flex;gap:7px;margin-bottom:10px}.inner-search{flex:1;border:1px solid #e1e6ee;background:#fff;border-radius:13px;height:42px;padding:0 13px;outline:0;font-size:12px;box-shadow:0 3px 12px #11182708}.filter-icon,.icon-add{border:0;background:#eaf3ff;color:#0b67d9;border-radius:13px;width:42px;height:42px;font-size:20px;font-weight:900}.client-card{border-radius:17px;margin:7px 0}.client-head{padding:11px}.avatar{width:39px;height:39px}.client-main b{font-size:12px}.client-main span{font-size:9px}.vehicle-mini{padding:9px 11px}.vehicle-mini .car-photo{width:48px;height:34px;font-size:20px}.vehicle-mini .info b{font-size:11px}.vehicle-mini .info span{font-size:9px}
+.client-search-row{display:flex;gap:7px;margin-bottom:10px}.inner-search{flex:1;border:1px solid #e1e6ee;background:#fff;border-radius:13px;height:42px;padding:0 13px;outline:0;font-size:16px;box-shadow:0 3px 12px #11182708}.filter-icon,.icon-add{border:0;background:#eaf3ff;color:#0b67d9;border-radius:13px;width:42px;height:42px;font-size:20px;font-weight:900}.client-card{border-radius:17px;margin:7px 0}.client-head{padding:11px}.avatar{width:39px;height:39px}.client-main b{font-size:12px}.client-main span{font-size:9px}.vehicle-mini{padding:9px 11px}.vehicle-mini .car-photo{width:48px;height:34px;font-size:20px}.vehicle-mini .info b{font-size:11px}.vehicle-mini .info span{font-size:9px}
 .settings-group-title{font-size:11px;font-weight:900;color:#667085;margin:18px 3px 7px;text-transform:none}.settings-card{margin-top:0;border-radius:16px}.setting{padding:11px}.setting .si{width:34px;height:34px}.setting .st b{font-size:12px}.setting .st span{font-size:9px}
 .bottom{padding-top:5px}.bottom button{font-size:8px}.bottom button .bi{font-size:18px}.fab{width:53px;height:53px;bottom:calc(59px + env(safe-area-inset-bottom))}
 .sheet{border-radius:25px 25px 0 0;padding:12px 15px calc(22px + env(safe-area-inset-bottom))}
