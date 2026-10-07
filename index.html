@@ -1,80 +1,49 @@
-<!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1220">
-<link rel="manifest" href="manifest.webmanifest">
-<title>Centro Revisioni Marchesano</title>
+<!doctype html><html lang="it"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220"><link rel="manifest" href="manifest.webmanifest"><title>Centro Revisioni Marchesano</title>
 <style>
-:root{--bg:#f3f5f8;--card:#fff;--ink:#101828;--muted:#667085;--blue:#0b63f6;--red:#e53935;--orange:#ef8b17;--green:#149447;--line:#e6eaf0}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--ink)}
-.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:88px}
-header{background:linear-gradient(135deg,#0b1220,#173b73);color:#fff;padding:28px 20px 22px;border-radius:0 0 28px 28px;box-shadow:0 8px 24px #0b122020}
-.brand{display:flex;gap:13px;align-items:center}.logo{width:48px;height:48px;border-radius:14px;background:#fff1;display:grid;place-items:center;font-size:26px}.brand h1{font-size:20px;margin:0}.brand p{font-size:12px;margin:3px 0 0;color:#cbd5e1}
-.search{margin-top:18px;background:#fff1;border:1px solid #ffffff25;border-radius:14px;padding:12px 14px;color:white;width:100%;outline:0;font-size:15px}.search::placeholder{color:#cbd5e1}
-main{padding:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:var(--card);border-radius:18px;padding:15px;box-shadow:0 4px 16px #1018280b}.stat b{font-size:25px;display:block}.stat span{font-size:12px;color:var(--muted)}
-.section{margin-top:22px}.section h2{font-size:17px;margin:0 0 10px}.empty{background:#fff;border-radius:18px;padding:22px;color:var(--muted);text-align:center}
-.card{background:#fff;border-radius:18px;padding:15px;margin:10px 0;box-shadow:0 4px 16px #1018280b;border:1px solid var(--line)}.row{display:flex;justify-content:space-between;gap:10px}.name{font-weight:700}.plate{font-weight:800;letter-spacing:1px}.muted{color:var(--muted);font-size:13px}.badge{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}.danger{background:#ffebeb;color:#b42318}.warn{background:#fff3df;color:#b54708}.ok{background:#e8f7ee;color:#087443}
-.actions{display:flex;gap:8px;margin-top:12px}.btn{border:0;border-radius:12px;padding:10px 12px;font-weight:700;background:#eef2f7;color:#344054}.primary{background:var(--blue);color:#fff}.dangerBtn{color:#b42318;background:#fff0f0}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(720px,100%);background:#fffffff2;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px}nav button{flex:1;border:0;background:transparent;padding:10px;border-radius:13px;font-weight:700;color:#475467}nav .active{background:#eaf1ff;color:var(--blue)}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:5}.sheet{background:#fff;width:100%;max-width:720px;margin:auto;border-radius:26px 26px 0 0;padding:20px;max-height:92vh;overflow:auto}.sheet h2{margin:0 0 16px}.field{margin:10px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:15px}.field textarea{min-height:75px}.formActions{display:flex;gap:10px;margin-top:16px}.formActions button{flex:1}
-.toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#101828;color:#fff;padding:11px 16px;border-radius:999px;display:none;font-size:13px;z-index:10}
-@media(min-width:721px){header{border-radius:0 0 28px 28px;margin:0 0}.modal{align-items:center}.sheet{border-radius:24px}}
-</style>
-</head>
-<body>
-<div class="app">
-<header><div class="brand"><div class="logo">🚗</div><div><h1>Centro Revisioni Marchesano</h1><p>I miei clienti · Revisioni</p></div></div><input id="search" class="search" placeholder="Cerca cliente, telefono, targa o auto…"></header>
-<main>
-<div class="grid"><div class="stat"><b id="urgent">0</b><span>Entro 30 giorni</span></div><div class="stat"><b id="soon">0</b><span>31–60 giorni</span></div><div class="stat"><b id="total">0</b><span>Clienti</span></div></div>
-<div id="dashboard"></div>
-</main>
-<nav><button id="homeBtn" class="active">⌂ Home</button><button id="clientsBtn">👥 Clienti</button><button id="addBtn" class="primary">＋ Nuovo</button><button id="backupBtn">☁ Backup</button></nav>
-</div>
-
+:root{--bg:#f3f5f8;--card:#fff;--ink:#101828;--muted:#667085;--blue:#0b63f6;--line:#e6eaf0}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--ink)}.app{max-width:720px;margin:auto;min-height:100vh;padding-bottom:90px}header{background:linear-gradient(135deg,#0b1220,#173b73);color:#fff;padding:28px 20px 22px;border-radius:0 0 28px 28px}.brand{display:flex;gap:13px;align-items:center}.logo{width:48px;height:48px;border-radius:14px;background:#ffffff18;display:grid;place-items:center;font-size:26px}.brand h1{font-size:20px;margin:0}.brand p{font-size:12px;margin:3px 0;color:#cbd5e1}.search{margin-top:18px;background:#fff1;border:1px solid #ffffff25;border-radius:14px;padding:12px 14px;color:#fff;width:100%;font-size:15px}.search::placeholder{color:#cbd5e1}main{padding:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#fff;border-radius:18px;padding:15px}.stat b{font-size:25px;display:block}.stat span,.muted,.hint,.small{font-size:12px;color:var(--muted)}.section{margin-top:22px}.section h2{font-size:17px;margin:0 0 10px}.empty{background:#fff;border-radius:18px;padding:22px;color:var(--muted);text-align:center}.card{background:#fff;border-radius:18px;padding:15px;margin:10px 0;border:1px solid var(--line)}.row{display:flex;justify-content:space-between;gap:10px}.name{font-weight:700}.plate{font-weight:800;letter-spacing:1px}.badge{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}.danger{background:#ffebeb;color:#b42318}.warn{background:#fff3df;color:#b54708}.ok{background:#e8f7ee;color:#087443}.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:10px 12px;font-weight:700;background:#eef2f7;color:#344054}.primary{background:var(--blue);color:#fff}nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(720px,100%);background:#fffffff2;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:flex;gap:6px;z-index:4}nav button{flex:1;border:0;background:transparent;padding:10px 6px;border-radius:13px;font-weight:700;color:#475467}nav .active{background:#eaf1ff;color:var(--blue)}nav .primary{background:var(--blue);color:#fff}.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;z-index:5}.sheet{background:#fff;width:100%;max-width:720px;margin:auto;border-radius:26px 26px 0 0;padding:20px;max-height:92vh;overflow:auto}.sheet h2{margin:0 0 16px}.field{margin:10px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:15px;background:#fff}.field textarea{min-height:75px}.subhead{font-size:14px;font-weight:800;margin:18px 0 8px}.formActions{display:flex;gap:10px;margin-top:16px}.formActions button{flex:1}.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#101828;color:#fff;padding:11px 16px;border-radius:999px;display:none;font-size:13px;z-index:10}@media(min-width:721px){.modal{align-items:center}.sheet{border-radius:24px}}
+</style></head><body>
+<div class="app"><header><div class="brand"><div class="logo">🚗</div><div><h1>Centro Revisioni Marchesano</h1><p>I miei clienti · Revisioni</p></div></div><input id="search" class="search" placeholder="Cerca cliente, telefono, targa o auto…"></header>
+<main><div class="grid"><div class="stat"><b id="urgent">0</b><span>Scadenze entro 30 gg</span></div><div class="stat"><b id="soon">0</b><span>31–60 giorni</span></div><div class="stat"><b id="total">0</b><span>Clienti</span></div></div><div id="dashboard"></div></main>
+<nav><button id="homeBtn" class="active">⌂ Home</button><button id="clientsBtn">👥 Clienti</button><button id="addBtn" class="primary">＋ Nuovo</button><button id="backupBtn">☁ Backup</button></nav></div>
 <div id="modal" class="modal"><div class="sheet"><h2 id="modalTitle">Nuovo cliente</h2>
-<div class="field"><label>Nome e cognome</label><input id="name"></div>
-<div class="field"><label>Telefono</label><input id="phone" type="tel"></div>
-<div class="field"><label>Auto</label><input id="car"></div>
+<div class="field"><label>Nome e cognome</label><input id="name"></div><div class="field"><label>Telefono</label><input id="phone" type="tel"></div>
+<div class="subhead">Veicolo</div><div class="field"><label>Marca e modello</label><input id="car" placeholder="es. Fiat Panda 1.3 MJT"></div>
 <div class="field"><label>Targa</label><input id="plate" style="text-transform:uppercase"></div>
-<div class="field"><label>Data revisione</label><input id="date" type="date"></div>
-<div class="field"><label>Ricordami prima</label><input id="reminder" type="number" value="30" min="1" max="365"></div>
-<div class="field"><label>Note</label><textarea id="notes"></textarea></div>
+<div class="field"><label>Data immatricolazione</label><input id="registrationDate" type="date"><div class="hint">Per un veicolo nuovo, la prima revisione viene calcolata automaticamente a 4 anni.</div></div>
+<div class="field"><label>Data ultima revisione (se già effettuata)</label><input id="lastRevision" type="date"><div class="hint">Se presente, viene calcolata la prossima revisione a 2 anni.</div></div>
+<div class="field"><label>Scadenza revisione</label><input id="revisionDate" type="date"><div class="hint">Puoi modificarla manualmente.</div></div>
+<div class="field"><label>Scadenza GPL</label><input id="gplDate" type="date"></div>
+<div class="field"><label>Scadenza Metano</label><input id="cngDate" type="date"></div>
+<div class="field"><label>Promemoria</label><select id="reminder"><option value="15">15 giorni prima</option><option value="30" selected>30 giorni prima</option><option value="45">45 giorni prima</option><option value="60">60 giorni prima</option><option value="90">90 giorni prima</option></select></div>
+<div class="field"><label>Note</label><textarea id="notes" placeholder="Es. cliente abituale…"></textarea></div>
 <div class="formActions"><button class="btn" onclick="closeModal()">Annulla</button><button class="btn primary" onclick="saveClient()">Salva cliente</button></div>
-</div></div>
-<div id="toast" class="toast"></div>
+</div></div><div id="toast" class="toast"></div>
 <script>
-const KEY='crm_marchesano_v1'; let clients=JSON.parse(localStorage.getItem(KEY)||'[]'); let editId=null;
-const $=id=>document.getElementById(id);
+const KEY='crm_marchesano_v2';
+let clients=JSON.parse(localStorage.getItem(KEY)||'null');
+if(!clients){
+  const old=JSON.parse(localStorage.getItem('crm_marchesano_v1')||'[]');
+  clients=old.map(c=>({...c,registrationDate:c.registrationDate||'',lastRevision:c.lastRevision||'',revisionDate:c.revisionDate||c.date||'',gplDate:c.gplDate||'',cngDate:c.cngDate||''}));
+  localStorage.setItem(KEY,JSON.stringify(clients));
+}
+let editId=null;const $=id=>document.getElementById(id);
 function save(){localStorage.setItem(KEY,JSON.stringify(clients))}
-function days(date){return Math.ceil((new Date(date+'T23:59:59')-new Date())/86400000)}
-function status(d){let x=days(d);return x<0?['Scaduta','danger']:x<=30?[`Tra ${x} gg`,'danger']:x<=60?[`Tra ${x} gg`,'warn']:[`Tra ${x} gg`,'ok']}
-function render(filter=''){
- let q=filter.toLowerCase(); let list=clients.filter(c=>(c.name+' '+c.phone+' '+c.car+' '+c.plate).toLowerCase().includes(q));
- $('total').textContent=clients.length;
- $('urgent').textContent=clients.filter(c=>days(c.date)<=30).length;
- $('soon').textContent=clients.filter(c=>days(c.date)>30&&days(c.date)<=60).length;
- $('dashboard').innerHTML='';
- if(!list.length){$('dashboard').innerHTML='<div class="section"><div class="empty">Nessun cliente trovato.<br>Premi <b>＋ Nuovo</b> per iniziare.</div></div>';return}
- list.sort((a,b)=>a.date.localeCompare(b.date));
- const groups=[['🔴 Da contattare',list.filter(c=>days(c.date)<=30)],['🟠 Prossime scadenze',list.filter(c=>days(c.date)>30&&days(c.date)<=60)],['🟢 Future',list.filter(c=>days(c.date)>60)]];
- groups.forEach(([title,arr])=>{if(!arr.length)return;let s=document.createElement('div');s.className='section';s.innerHTML='<h2>'+title+'</h2>';arr.forEach(c=>{let [txt,cl]=status(c.date);let el=document.createElement('div');el.className='card';el.innerHTML=`<div class="row"><div><div class="name">${esc(c.name)}</div><div class="muted">${esc(c.phone||'')}</div></div><span class="badge ${cl}">${txt}</span></div><div style="margin-top:10px"><b>${esc(c.car||'Auto')}</b> · <span class="plate">${esc(c.plate)}</span></div><div class="muted">Revisione: ${new Date(c.date+'T12:00').toLocaleDateString('it-IT')}</div><div class="actions"><button class="btn primary" onclick="call('${esc(c.phone||'')}')">📞 Chiama</button><button class="btn" onclick="wa('${esc(c.phone||'')}')">💬 WhatsApp</button><button class="btn" onclick="edit('${c.id}')">✏️</button></div>`;s.appendChild(el)});$('dashboard').appendChild(s)})}
+function dd(d){return d?Math.ceil((new Date(d+'T23:59:59')-new Date())/86400000):null}
+function badge(d){let x=dd(d);return x<0?['Scaduta','danger']:x<=30?[`Tra ${x} gg`,'danger']:x<=60?[`Tra ${x} gg`,'warn']:[`Tra ${x} gg`,'ok']}
+function addYears(d,y){if(!d)return'';let x=new Date(d+'T12:00:00');x.setFullYear(x.getFullYear()+y);return x.toISOString().slice(0,10)}
+function deadlines(c){return[{type:'Revisione',date:c.revisionDate||c.date,icon:'🔧'},{type:'GPL',date:c.gplDate,icon:'⛽'},{type:'Metano',date:c.cngDate,icon:'🟢'}].filter(x=>x.date)}
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function openModal(c=null){editId=c?.id||null;$('modalTitle').textContent=c?'Modifica cliente':'Nuovo cliente';['name','phone','car','plate','date','reminder','notes'].forEach(k=>$(k).value=c?.[k]??(k==='reminder'?30:''));$('modal').style.display='flex'}
+function render(f=''){let q=f.toLowerCase(),list=clients.filter(c=>(c.name+' '+c.phone+' '+c.car+' '+c.plate).toLowerCase().includes(q)),ds=list.flatMap(c=>deadlines(c).map(x=>({...x,c})));$('total').textContent=clients.length;$('urgent').textContent=ds.filter(x=>dd(x.date)<=30).length;$('soon').textContent=ds.filter(x=>dd(x.date)>30&&dd(x.date)<=60).length;$('dashboard').innerHTML='';
+if(!list.length){$('dashboard').innerHTML='<div class="section"><div class="empty">Nessun cliente trovato.<br>Premi <b>＋ Nuovo</b> per iniziare.</div></div>';return}
+ds.sort((a,b)=>a.date.localeCompare(b.date));[['🔴 Da contattare',ds.filter(x=>dd(x.date)<=30)],['🟠 Prossime scadenze',ds.filter(x=>dd(x.date)>30&&dd(x.date)<=60)],['🟢 Future',ds.filter(x=>dd(x.date)>60)]].forEach(([title,a])=>{if(!a.length)return;let s=document.createElement('div');s.className='section';s.innerHTML='<h2>'+title+'</h2>';a.forEach(x=>{let[b,cl]=badge(x.date),c=x.c,e=document.createElement('div');e.className='card';e.innerHTML=`<div class="row"><div><div class="name">${esc(c.name)}</div><div class="muted">${esc(c.phone)}</div></div><span class="badge ${cl}">${x.icon} ${x.type}: ${b}</span></div><div style="margin-top:10px"><b>${esc(c.car||'Auto')}</b> · <span class="plate">${esc(c.plate)}</span></div><div class="muted">${x.type}: ${new Date(x.date+'T12:00').toLocaleDateString('it-IT')}</div><div class="actions"><button class="btn primary" onclick="call('${esc(c.phone)}')">📞 Chiama</button><button class="btn" onclick="wa('${esc(c.phone)}')">💬 WhatsApp</button><button class="btn" onclick="edit('${c.id}')">✏️</button></div>`;s.appendChild(e)});$('dashboard').appendChild(s)})}
+function openModal(c=null){editId=c?.id||null;$('modalTitle').textContent=c?'Modifica cliente':'Nuovo cliente';$('name').value=c?.name||'';$('phone').value=c?.phone||'';$('car').value=c?.car||'';$('plate').value=c?.plate||'';$('registrationDate').value=c?.registrationDate||'';$('lastRevision').value=c?.lastRevision||'';$('revisionDate').value=c?.revisionDate||c?.date||'';$('gplDate').value=c?.gplDate||'';$('cngDate').value=c?.cngDate||'';$('reminder').value=c?.reminder||30;$('notes').value=c?.notes||'';$('modal').style.display='flex'}
 function closeModal(){$('modal').style.display='none'}
-function saveClient(){let c={id:editId||crypto.randomUUID(),name:$('name').value.trim(),phone:$('phone').value.trim(),car:$('car').value.trim(),plate:$('plate').value.trim().toUpperCase(),date:$('date').value,reminder:+$('reminder').value||30,notes:$('notes').value.trim()};if(!c.name||!c.plate||!c.date){toast('Inserisci almeno nome, targa e data revisione');return}if(editId)clients=clients.map(x=>x.id===editId?c:x);else clients.push(c);save();closeModal();render($('search').value);toast('Cliente salvato')}
-function edit(id){openModal(clients.find(c=>c.id===id))}
-function call(p){if(p)location.href='tel:'+p}
-function wa(p){if(p)location.href='https://wa.me/'+p.replace(/\D/g,'')}
-function toast(t){$('toast').textContent=t;$('toast').style.display='block';setTimeout(()=>{$('toast').style.display='none'},2200)}
-$('search').oninput=e=>render(e.target.value);$('addBtn').onclick=()=>openModal();
-$('homeBtn').onclick=()=>{render('');$('homeBtn').classList.add('active');$('clientsBtn').classList.remove('active')};
-$('clientsBtn').onclick=()=>{render('');$('clientsBtn').classList.add('active');$('homeBtn').classList.remove('active')};
-$('backupBtn').onclick=()=>backup();
-function backup(){let blob=new Blob([JSON.stringify({app:'Centro Revisioni Marchesano',version:1,exported:new Date().toISOString(),clients},null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='backup_clienti_marchesano.json';a.click();toast('Backup esportato')}
-function importBackup(file){let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.clients))throw 0;clients=x.clients;save();render();toast('Backup ripristinato')}catch{toast('Backup non valido')}};r.readAsText(file)}
-render();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
-</script>
-</body></html>
+$('registrationDate').onchange=()=>{if(!$('lastRevision').value&&$('registrationDate').value)$('revisionDate').value=addYears($('registrationDate').value,4)}
+$('lastRevision').onchange=()=>{if($('lastRevision').value)$('revisionDate').value=addYears($('lastRevision').value,2)}
+function saveClient(){let c={id:editId||crypto.randomUUID(),name:$('name').value.trim(),phone:$('phone').value.trim(),car:$('car').value.trim(),plate:$('plate').value.trim().toUpperCase(),registrationDate:$('registrationDate').value,lastRevision:$('lastRevision').value,revisionDate:$('revisionDate').value,gplDate:$('gplDate').value,cngDate:$('cngDate').value,reminder:+$('reminder').value||30,notes:$('notes').value.trim()};if(!c.name||!c.plate){toast('Inserisci almeno nome e targa');return}if(editId)clients=clients.map(x=>x.id===editId?c:x);else clients.push(c);save();closeModal();render($('search').value);toast('Cliente salvato')}
+function edit(id){openModal(clients.find(c=>c.id===id))}function call(p){if(p)location.href='tel:'+p}function wa(p){if(p)location.href='https://wa.me/'+p.replace(/\D/g,'')}
+function toast(t){$('toast').textContent=t;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200)}
+$('search').oninput=e=>render(e.target.value);$('addBtn').onclick=()=>openModal();$('homeBtn').onclick=()=>{render('');$('homeBtn').classList.add('active');$('clientsBtn').classList.remove('active')};$('clientsBtn').onclick=()=>{render('');$('clientsBtn').classList.add('active');$('homeBtn').classList.remove('active')};$('backupBtn').onclick=()=>{let b=new Blob([JSON.stringify({app:'Centro Revisioni Marchesano',version:2,exported:new Date().toISOString(),clients},null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='backup_clienti_marchesano_v2.json';a.click();toast('Backup esportato')};render();if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
